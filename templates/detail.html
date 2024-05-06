@@ -152,7 +152,7 @@
                   </div>
                   <div class="product-featured-caption">
                                 <h7>{{ event.category.name }} </h7>
-                                <h4><a class="product-featured-title" href="#">{{ event.name }}</a></h4>
+                                <h4><a class="product-featured-title" href="{% url 'event_detail' event.id %}">{{ event.name }}</a></h4>
                                 <p class="big">{{ event.event_dates.first.price }} so'm </p>
                                 <p class="">{{ event.event_dates.first.date }} </p>
                   </div>

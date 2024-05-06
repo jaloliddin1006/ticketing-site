@@ -43,12 +43,12 @@ class Event(BaseModel):
         img = Image.open(self.card_image.path)
         o_size = (370,395)
         img.thumbnail(o_size)
-        img.save(self.card_image.path, quality=50)
+        img.save(self.card_image.path, quality=100)
 
         img = Image.open(self.banner_image.path)
         o_size = (1920,1149)
         img.thumbnail(o_size)
-        img.save(self.banner_image.path)
+        img.save(self.banner_image.path, quality=100)
 
 class EventDate(BaseModel):
     event = models.ForeignKey(Event, on_delete=models.CASCADE, related_name='event_dates')
@@ -105,6 +105,9 @@ class About(BaseModel):
     title = models.CharField(max_length=255)
     subtitle = models.CharField(max_length=355)
     body = RichTextField()
+    phone = models.CharField(max_length=20, null=True, blank=True)
+    email = models.EmailField(null=True, blank=True)
+    address = models.TextField(null=True, blank=True)
     image = models.ImageField(upload_to='about/', null=True, blank=True)
     telegram_url = models.URLField(null=True, blank=True)
     instagram_url = models.URLField(null=True, blank=True)
@@ -129,7 +132,7 @@ class EventImages(BaseModel):
         img = Image.open(self.image.path)
         o_size = (640,429)
         img.thumbnail(o_size)
-        img.save(self.image.path, quality=50)
+        img.save(self.image.path, quality=100)
 
 
 

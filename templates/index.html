@@ -5,7 +5,7 @@
 
       <!-- Swiper-->
       <section class="section section-lg section-main-bunner section-main-bunner-filter text-center">
-        <div class="main-bunner-img" style="background-image: url(&quot;{% static 'images/bg-bunner-2.jpg' %}&quot;); background-size: cover;"></div>
+        <div class="main-bunner-img" style="background-image: url(&quot;{% static 'images/1920-1149.jpg' %}&quot;); background-size: cover;"></div>
         <div class="main-bunner-inner">
           <div class="container">
             <div class="box-default">
@@ -124,7 +124,7 @@
               <div class="post-corporate"><a class="badge" href="#">{{ event.event_dates.first.date }}</a>
                 <h4 class="post-corporate-title"><a href="{% url 'event_detail' event.id %}">{{ event.name }}</a></h4>
                 <div class="post-corporate-text">
-                  <p>{{ event.description }}</p>
+                  <p>{{ event.description|slice:130 }}</p>
                   <p>{{ event.event_dates.first.price }} so'm</p>
                 </div><a class="post-corporate-link" href="{% url 'event_detail' event.id %}">Get Ticket<span class="icon linearicons-arrow-right"></span></a>
               </div>
