@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block title %}Detail{% endblock title %}
+  {% load static %}
+{% block content %}
+
+      <section class="parallax-container overlay-1" data-parallax-img="{% static 'images/breadcrumbs.jpg' %}">
+        <div class="parallax-content breadcrumbs-custom context-dark"> 
+          <div class="container">
+            <div class="row justify-content-center">
+              <div class="col-12 col-lg-9">
+                <h2 class="breadcrumbs-custom-title">All Tickets</h2>
+                <ul class="breadcrumbs-custom-path">
+              <p class="big box-default-text">{{ about.subtitle }}</p>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section-lg bg-white">
+        <div class="container">
+          <h2 class="text-center">All Events</h2>
+          <div class="row row-30 row-md-60">
+            <div class="row row-20 row-lg-30">
+              {% for event in events %}
+
+                  <div class="col-md-6 col-lg-4 wow-outer">
+                    <div class="wow fadeInUp">
+                      <div class="product-featured">
+                        <div class="product-featured-figure"><img src="{{ event.card_image.url }}" alt="" width="370" height="395"/>
+                          <div class="product-featured-button"><a class="button button-primary" href="{% url 'event_detail' event.id %}">Get Ticket....</a></div>
+                        </div>
+                        <div class="product-featured-caption">
+                                <h7>{{ event.category.name }} </h7>
+                                <h4><a class="product-featured-title" href="{% url 'event_detail' event.id %}">{{ event.name }}</a></h4>
+                          <p class="big">{{ event.event_dates.first.price }} so'm </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+              {% endfor %}
+
+                </div>
+               
+
+          </div>
+        </div>
+      </section>
+    
+      {% endblock content %}

@@ -14,7 +14,7 @@ class BaseModel(models.Model):
 class VerifyEmailCode:
     def __init__(self):
         self.SIGN = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0']
-        self.K = 12
+        self.K = 8
 
     def new_code(self):
 

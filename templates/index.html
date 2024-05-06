@@ -1,0 +1,141 @@
+{% extends "base.html" %}
+{% block title %}Home{% endblock title %}
+  {% load static %}
+{% block content %}
+
+      <!-- Swiper-->
+      <section class="section section-lg section-main-bunner section-main-bunner-filter text-center">
+        <div class="main-bunner-img" style="background-image: url(&quot;{% static 'images/bg-bunner-2.jpg' %}&quot;); background-size: cover;"></div>
+        <div class="main-bunner-inner">
+          <div class="container">
+            <div class="box-default">
+              <h1 class="box-default-title">{{ about.title }}</h1>
+              <div class="box-default-decor"></div>
+              <p class="big box-default-text">{{ about.subtitle }}</p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <div class="bg-gray-1">
+
+<section class="section section-lg bg-gray-1">
+  <div class="container">
+    <div class="row row-50">
+      <div class="col-lg-6 pr-xl-5"><img src="{{ about.image.url }}" alt="" width="518" height="434"/>
+      </div>
+      <div class="col-lg-6">
+        <h2>About Our Site</h2>
+  
+        <p>{{ about.body|safe }}</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+        <section class="section section-lg bg-gray-1">
+          <div class="container">
+            <h2 class="text-center">Our Concerts Menu</h2>
+            <div class="row">
+              <div class="col-12 ">
+                <div class="tabs-custom tabs-horizontal tabs-classic" id="tabs-1">
+                  <ul class="nav nav-tabs nav-tabs-classic">
+                    {% for ctg in categories %}
+                      {% if forloop.counter == 1 %}
+                        <li class="nav-item" role="presentation"><a class="nav-link active" href="#tabs-1-{{ ctg.id }}" data-toggle="tab">{{ ctg.name }}</a></li>
+                      {% else %}
+                        <li class="nav-item" role="presentation"><a class="nav-link" href="#tabs-1-{{ ctg.id }}" data-toggle="tab">{{ ctg.name }}</a></li>
+                      {% endif %}
+                    {% endfor %}
+                  </ul>
+                  <div class="tab-content">
+
+                    {% for ctg in categories %}
+                    {% if forloop.counter == 1 %}
+
+                    <div class="tab-pane fade show active" id="tabs-1-{{ ctg.id }}">
+                      <div class="row row-20 row-lg-30">
+                    {% for event in ctg.get_events %}
+
+                        <div class="col-md-6 col-lg-4 wow-outer">
+                          <div class="wow fadeInUp">
+                            <div class="product-featured">
+                              <div class="product-featured-figure"><img src="{{ event.card_image.url }}" alt="" width="370" height="395"/>
+                                <div class="product-featured-button"><a class="button button-primary" href="{% url 'event_detail' event.id %}">Get Ticket....</a></div>
+                              </div>
+                              <div class="product-featured-caption">
+                                <h7>{{ event.category.name }} </h7>
+                                <h4><a class="product-featured-title" href="{% url 'event_detail' event.id %}">{{ event.name }}</a></h4>
+                                <p class="big">{{ event.event_dates.first.price }} so'm </p>
+                                <p class="">{{ event.event_dates.first.date }} </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                    {% endfor %}
+
+                      </div>
+                     
+                    </div>
+                    {% else %}
+
+                    <div class="tab-pane fade" id="tabs-1-{{ ctg.id }}">
+                      <div class="row row-20 row-lg-30">
+                        {% for event in ctg.get_events %}
+    
+                            <div class="col-md-6 col-lg-4 wow-outer">
+                              <div class="wow fadeInUp">
+                                <div class="product-featured">
+                                  <div class="product-featured-figure"><img src="{{ event.card_image.url }}" alt="" width="370" height="395"/>
+                                    <div class="product-featured-button"><a class="button button-primary" href="{% url 'event_detail' event.id %}">Get Ticket....</a></div>
+                                  </div>
+                                  <div class="product-featured-caption">
+                                    <h4><a class="product-featured-title" href="{% url 'event_detail' event.id %}">{{ event.name }}</a></h4>
+                                    <p class="big">{{ event.event_dates.first.price }} so'm </p>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                        {% endfor %}
+    
+                          </div>
+                         
+                    </div>
+                
+                    {% endif %}
+
+                    {% endfor %}
+
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+
+        <section class="section-lg bg-default">
+          <div class="container wow-outer">
+            <h2 class="text-center wow slideInDown">New Tickets</h2>
+            <!-- Owl Carousel-->
+            <div class="owl-carousel wow fadeInUp" data-items="1" data-md-items="2" data-lg-items="3" data-dots="true" data-nav="false" data-stage-padding="15" data-loop="false" data-margin="30" data-mouse-drag="false">
+              {% for event in events %}
+              <div class="post-corporate"><a class="badge" href="#">{{ event.event_dates.first.date }}</a>
+                <h4 class="post-corporate-title"><a href="{% url 'event_detail' event.id %}">{{ event.name }}</a></h4>
+                <div class="post-corporate-text">
+                  <p>{{ event.description }}</p>
+                  <p>{{ event.event_dates.first.price }} so'm</p>
+                </div><a class="post-corporate-link" href="{% url 'event_detail' event.id %}">Get Ticket<span class="icon linearicons-arrow-right"></span></a>
+              </div>
+              {% endfor%}
+              
+           
+            </div>
+          </div>
+        </section>
+
+      </div>
+
+
+{% endblock content %}

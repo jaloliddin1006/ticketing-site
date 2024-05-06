@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Location, Category, Event, EventDate, Ticket
+from .models import Location, Category, Event, EventDate, Ticket, About, EventImages, Contact
 # Register your models here.
 
 @admin.register(Location)
@@ -18,9 +18,13 @@ class EventDateInline(admin.TabularInline):
     model = EventDate
     extra = 1
 
+class EventImagesInline(admin.TabularInline):
+    model = EventImages
+    extra = 1
+
 @admin.register(Event)
 class EventAdmin(admin.ModelAdmin):
-    inlines = [EventDateInline]
+    inlines = [EventDateInline, EventImagesInline]
     list_display = ['name', 'location', 'category']
     search_fields = ['name', 'location__name', 'category__name']
     list_filter = ['location', 'category']
@@ -44,3 +48,14 @@ class TicketAdmin(admin.ModelAdmin):
     search_fields = ['full_name', 'phone', 'event_date__event__name']
     list_filter = ['event_date', 'created_at']
 
+
+@admin.register(About)
+class AboutAdmin(admin.ModelAdmin):
+    list_display = ['title', 'subtitle']
+
+
+@admin.register(Contact)
+class ContactAdmin(admin.ModelAdmin):
+    list_display = ['name', 'email', 'phone', 'message', 'created_at']
+    search_fields = ['name', 'email', 'phone', 'message']
+    list_filter = ['created_at']
